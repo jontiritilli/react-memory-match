@@ -22,8 +22,7 @@ class GameBoard extends Component {
   }
   render(){
     let cards = this.props.cardImages.map((card, idx)=> {
-      console.log('cardName'+card)
-      return <Card key={idx} cardImage={card}/>
+      return <Card key={idx} index={idx} cardImage={card}/>
     })
     return (
       <div className="gameContainer">

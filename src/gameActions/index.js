@@ -5,8 +5,6 @@ export const generateCards = () => {
 	let holderArray = [];
   let randomSelectionArray = [];
 
-  console.log(ogCardImages);
-
 	for (let selector = 0; selector < 9; selector++) {
 		let randomIndex = Math.floor(Math.random() * ogCardImages.length);
 		holderArray.push(ogCardImages[randomIndex]);
@@ -30,16 +28,16 @@ export const generateCards = () => {
 };
 
 export const revealCard = (state, payload) => {
-	let { firstCardClicked, secondCardClicked, gameBoardCheck, canBeClicked } = state;
-	const { cardIndex, cardId } = payload;
-
-	if (gameBoardCheck[cardIndex] || firstCardClicked === payload || !canBeClicked) {
+	let { firstCardClicked, gameBoardCheck, canBeClicked } = state;
+	const { cardIndex: idx } = payload;
+	if (gameBoardCheck[idx] || firstCardClicked === payload || !canBeClicked) {
 		return state;
 	}
 
 	if (!firstCardClicked) {
 		firstCardClicked = payload;
-		gameBoardCheck[cardIndex] = true;
+    gameBoardCheck[idx] = true;
+
 		return {
       ...state,
 			firstCardClicked: payload,
@@ -47,8 +45,7 @@ export const revealCard = (state, payload) => {
 		};
 	}
 
-	gameBoardCheck[cardIndex] = true;
-
+	gameBoardCheck[idx] = true;
 	return {
 		...state,
 		secondCardClicked: payload,

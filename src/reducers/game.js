@@ -1,5 +1,5 @@
 import types from '../actions/types';
-import { generateCards, revealCard, checkPair, concealCards } from '../gameActions/index';
+import { generateCards, revealCard, checkPair, concealCards } from '../gameActions';
 
 const DEFAULT_STATE = {
 	cardCount: 0,
@@ -34,8 +34,7 @@ export default function(state = DEFAULT_STATE, action) {
 			return concealCards(state);
 
 		case types.RESET_GAME:
-			let { gamePlayCount, matchCount, cardCount } = state;
-
+			let { gamePlayCount } = state;
 			return {
 				...state,
 				cardCount: 18,

@@ -5,26 +5,29 @@ import {revealCard, concealCards} from '../actions';
 import cardBack from '../assets/images/card-back.png';
 
 class Card extends Component {
+  constructor(props){
+    super(props);
+  }
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.noMatch) {
 			this.resetCards = setTimeout(this.props.concealCards, 1000);
 		}
 	}
 	cardClicked() {
-		revealCard(this.props.cardImage, this.props.idx);
+    this.props.revealCard(this.props.cardImage, this.props.index);
+    console.log(this.props.gameBoardCheck)
   }
   render(){
-    let backStyle = {
-      display: ''
-    };
+		let backStyle = {
+			display: ''
+		};
+		if (this.props.gameBoardCheck[this.props.index]) {
+			backStyle.display = 'none';
+    }
     return (
-			<div className="card" onClick={this.cardClicked.bind(this)}>
-				<div className="back" style={backStyle}>
-					<img src={cardBack} />
-				</div>
-				<div className="front">
-					<img src={this.props.cardImage} />
-				</div>
+			<div className='card' onClick={this.cardClicked.bind(this)}>
+        <img className='back' style={backStyle} src={cardBack}/>
+        <img className='front' src={this.props.cardImage} />
 			</div>
     )
   }
