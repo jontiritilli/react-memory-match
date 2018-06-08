@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import rootReducer from './reducers';
+import React, { Component } from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-import App from './components/App';
+import PlayPage from './playPage';
+import '../assets/css/app.css';
 
-ReactDOM.render(
-	<BrowserRouter>
-		<Provider store={createStore(rootReducer)}>
-			<App />
-		</Provider>
-	</BrowserRouter>,
-	document.getElementById('root')
-);
+class App extends Component {
+	render() {
+		return (
+			<Route
+				render={({ location }) => {
+					return (
+						<TransitionGroup>
+							<CSSTransition key={location.key} classNames="fade" timeout={750}>
+								<Switch location={location}>
+									<Route exact path="/" component={PlayPage} />
+									<Redirect to="/" />
+								</Switch>
+							</CSSTransition>
+						</TransitionGroup>
+					);
+				}}
+			/>
+		);
+	}
+}
+
+export default App;

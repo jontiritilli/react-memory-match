@@ -1,39 +1,10 @@
-@font-face {
-    font-family: blocky;
-    src: url(../fonts/blocky.ttf);
+.header {
+  width: 100%
 }
-
-body {
-    margin: 0;
+.mainTitle {
+  width:
 }
-
-.app {
-    background-color: #000;
-    color: #fff;
-    font-family: blocky;
-    font-size: 30px;
-    padding: 50px;
-    text-align: center;
-}
-
-.app .logo {
-    height: 200px;
-}
-
-.app h1 {
-    text-shadow: 0 0 28px #61DAFB;
-    letter-spacing: 5px;
-}
-
-.rotate {
-    animation: spin 10s linear infinite;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.mainContainer {
+  width: 100vw;
+  height: 100vh;
 }
