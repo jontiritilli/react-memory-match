@@ -1,39 +1,27 @@
-@font-face {
-    font-family: blocky;
-    src: url(../fonts/blocky.ttf);
+.header {
+  width: 100%
 }
-
-body {
-    margin: 0;
+.card {
+  width: 14%;
+  height: 30%;
+  margin-right: 1%;
+  float: right;
+  position: relative;
 }
-
-.app {
-    background-color: #000;
-    color: #fff;
-    font-family: blocky;
-    font-size: 30px;
-    padding: 50px;
-    text-align: center;
+.card > img {
+  width: 100%;
 }
-
-.app .logo {
-    height: 200px;
+.card > .back {
+  position: absolute;
 }
-
-.app h1 {
-    text-shadow: 0 0 28px #61DAFB;
-    letter-spacing: 5px;
+.grid-container {
+  width: 90%;
 }
-
-.rotate {
-    animation: spin 10s linear infinite;
+.mainTitle {
+  width:
 }
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.mainContainer {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../images/background_5.jpg);
 }
