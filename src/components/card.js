@@ -1,31 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {revealCard, concealCards} from '../gameActions/index';
+import {revealCard, concealCards} from '../actions';
+
+import cardBack from '../assets/images/card-back.png';
 
 class Card extends Component {
-
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.noMatch) {
-			this.resetCards = setTimeout(this.props.revertCards, 1000);
+			this.resetCards = setTimeout(this.props.concealCards, 1000);
 		}
 	}
-
 	cardClicked() {
-		revealCard(this.props.cardFront, this.props.index);
+		revealCard(this.props.cardImage, this.props.idx);
   }
-
   render(){
     let backStyle = {
       display: ''
     };
-
     return (
 			<div className="card" onClick={this.cardClicked.bind(this)}>
 				<div className="back" style={backStyle}>
-					<img src={this.props.cardPack} />
+					<img src={cardBack} />
 				</div>
 				<div className="front">
-					<img src={this.props.cardFront} />
+					<img src={this.props.cardImage} />
 				</div>
 			</div>
     )

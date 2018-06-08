@@ -1,5 +1,5 @@
 import types from '../actions/types';
-import { createCards, revealCard, checkPair, concealCards } from '../gameActions/index';
+import { generateCards, revealCard, checkPair, concealCards } from '../gameActions/index';
 
 const DEFAULT_STATE = {
 	cardCount: 0,
@@ -17,20 +17,10 @@ const DEFAULT_STATE = {
 
 export default function(state = DEFAULT_STATE, action) {
 	switch (action.type) {
-		case types.SELECT_CARDPACK:
+		case types.GENERATE_CARDS:
 			return {
 				...state,
-				cardPack: action.payload,
-				attempts: 0,
-				accuracy: '---',
-				firstCardClicked: null,
-				secondCardClicked: null,
-				canBeClicked: true
-			};
-		case types.CREATE_CARDS:
-			return {
-				...state,
-				cardImages: createCards(),
+				cardImages: generateCards(),
 				cardCount: 18,
 				gameBoardCheck: new Array(18).fill(false)
 			};
@@ -44,7 +34,7 @@ export default function(state = DEFAULT_STATE, action) {
 			return concealCards(state);
 
 		case types.RESET_GAME:
-			let { gamesPlayed, matchesCount, cardCount } = state;
+			let { gamePlayCount, matchCount, cardCount } = state;
 
 			return {
 				...state,

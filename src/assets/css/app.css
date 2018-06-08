@@ -1,6 +1,14 @@
 .header {
   width: 100%
 }
+.card {
+  width: 13%;
+  height: 30%;
+  float: right;
+}
+.card img {
+  width: 100%;
+}
 .mainTitle {
   width:
 }

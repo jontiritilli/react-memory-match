@@ -1,36 +1,34 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { generateCards, checkPair } from '../actions';
+import { setTimeout } from 'timers';
 
 import Card from './card';
+import { generateCards, checkPair } from '../actions';
 
 import '../assets/css/app.css';
-import { setTimeout } from 'timers';
 
 class GameBoard extends Component {
   constructor(props){
     super(props);
     this.state = {}
   }
-
   componentDidMount(){
-    setTimeout(generateCards, 250);
+    setTimeout(this.props.generateCards, 250);
   }
-
-  componentWillReceiveProps(){
+  componentWillReceiveProps(nextProps){
 		if (nextProps.secondCardClicked !== null) {
-			checkPair();
+			this.props.checkPair();
 		}
   }
-
   render(){
     let cards = this.props.cardImages.map((card, idx)=> {
+      console.log('cardName'+card)
       return <Card key={idx} cardImage={card}/>
     })
     return (
       <div className="gameContainer">
-        gameArea
-        <div>{cards}</div>
+        Here is the game board
+        <div className={'grid-container'+ (this.props.cardImages[0] ? ' show' : '')}>{cards}</div>
       </div>
     )
   }
@@ -38,11 +36,11 @@ class GameBoard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-		cardFronts: state.game.cardFronts,
+		cardImages: state.game.cardImages,
 		gameBoardCheck: state.game.gameBoardCheck,
 		firstCardClicked: state.game.firstCardClicked,
 		secondCardClicked: state.game.secondCardClicked,
 		cardPack: state.game.cardPack
   };
 }
-export default connect(mapStateToProps, {})(GameBoard);
+export default connect(mapStateToProps, { generateCards, checkPair })(GameBoard);

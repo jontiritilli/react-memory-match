@@ -1,9 +1,11 @@
-import cardImages from '../cardData/index';
+import cardImages from '../cardData';
 
 export const generateCards = () => {
 	let ogCardImages = cardImages.slice();
 	let holderArray = [];
-	let randomSelectionArray = [];
+  let randomSelectionArray = [];
+
+  console.log(ogCardImages);
 
 	for (let selector = 0; selector < 9; selector++) {
 		let randomIndex = Math.floor(Math.random() * ogCardImages.length);
@@ -45,7 +47,6 @@ export const revealCard = (state, payload) => {
 		};
 	}
 
-	//if second card clicked
 	gameBoardCheck[cardIndex] = true;
 
 	return {
@@ -58,28 +59,26 @@ export const revealCard = (state, payload) => {
 
 export const checkPair = (state) => {
 	let {
-		gamesPlayed,
+		gamePlayCount,
 		attempts,
 		accuracy,
-		numberOfMatches,
-		numberOfCards,
+		matchCount,
+		cardCount,
 		firstCardClicked,
 		secondCardClicked
 	} = state;
 
 	attempts++;
 
-	//if two cards clicked are the same
 	if (firstCardClicked.cardId === secondCardClicked.cardId) {
-		numberOfMatches++;
-		accuracy = `${(numberOfMatches / attempts * 100).toFixed(1)}%`;
+		matchCount++;
+		accuracy = `${(matchCount / attempts * 100).toFixed(1)}%`;
 
-		//if player has matched all the cards
-		if (numberOfMatches === numberOfCards / 2) {
+		if (matchCount === cardCount / 2) {
 			return {
 				...state,
 				attempts,
-				numberOfMatches,
+				matchCount,
 				accuracy
 			};
 		}
@@ -89,12 +88,12 @@ export const checkPair = (state) => {
 			secondCardClicked: null,
 			attempts,
 			accuracy,
-			numberOfMatches,
+			matchCount,
 			canBeClicked: true
 		};
 	}
 
-	accuracy = `${(numberOfMatches / attempts * 100).toFixed(1)}%`;
+	accuracy = `${(matchCount / attempts * 100).toFixed(1)}%`;
 
 	return {
 		...state,

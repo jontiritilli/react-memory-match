@@ -4,6 +4,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import Header from './header';
 import GameBoard from './gameBoard';
+import { generateCards, checkPair } from '../actions';
 
 import '../assets/css/app.css';
 
@@ -15,11 +16,11 @@ class PlayPage extends Component {
     }
   }
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.numberOfMatches === nextProps.numberOfCards / 2 && nextProps.numberOfCards !== 0) {
+		if (nextProps.matchCount === nextProps.cardCount / 2 && nextProps.cardCount !== 0) {
 			this.setState({
 				gameAreaState: (
 					<CSSTransition key="win-modal" classNames="modal" timeout={500}>
-						<WinModal closeModal={this.closeModal} />
+						<WinModal closeModal={this.modalClose} />
 					</CSSTransition>
 				)
 			});
@@ -48,7 +49,7 @@ class PlayPage extends Component {
     return(
       <div className="mainContainer">
         <Header/>
-        <GameBoard key={this.props.gamesPlayed}/>
+        <GameBoard key={this.props.gamePlayCount}/>
       </div>
     )
   }
@@ -62,4 +63,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {})(PlayPage);
+export default connect(mapStateToProps, { generateCards, checkPair })(PlayPage);
