@@ -1,14 +1,17 @@
 import React from 'react';
-import '../assets/css/app.css';
-import logo from '../assets/images/logo.svg';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './reducers';
 
-const App = () => (
-    <div>
-        <div className="app">
-            <img src={logo} className="logo rotate"/>
-            <h1>Welcome to React</h1>
-        </div>
-    </div>
+import App from './components/App';
+
+ReactDOM.render(
+	<BrowserRouter>
+		<Provider store={createStore(rootReducer)}>
+			<App />
+		</Provider>
+	</BrowserRouter>,
+	document.getElementById('root')
 );
-
-export default App;
