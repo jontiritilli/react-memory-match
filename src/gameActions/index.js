@@ -28,7 +28,7 @@ export const generateCards = () => {
 };
 
 export const revealCard = (state, payload) => {
-	let { firstCardClicked, gameBoardCheck, canBeClicked } = state;
+	let { firstCardClicked, secondCardClicked, gameBoardCheck, canBeClicked } = state;
 	const { cardIndex: idx } = payload;
 	if (gameBoardCheck[idx] || firstCardClicked === payload || !canBeClicked) {
 		return state;
@@ -40,15 +40,17 @@ export const revealCard = (state, payload) => {
 
 		return {
       ...state,
-			firstCardClicked: payload,
+			firstCardClicked,
 			gameBoardCheck
 		};
 	}
 
-	gameBoardCheck[idx] = true;
+  secondCardClicked = payload;
+  gameBoardCheck[idx] = true;
+
 	return {
 		...state,
-		secondCardClicked: payload,
+		secondCardClicked,
 		gameBoardCheck,
 		canBeClicked: false
 	};
@@ -56,21 +58,20 @@ export const revealCard = (state, payload) => {
 
 export const checkPair = (state) => {
 	let {
-		gamePlayCount,
 		attempts,
 		accuracy,
 		matchCount,
 		cardCount,
 		firstCardClicked,
-		secondCardClicked
+    secondCardClicked
 	} = state;
 
 	attempts++;
 
-	if (firstCardClicked.cardId === secondCardClicked.cardId) {
+	if (firstCardClicked.cardIndex === secondCardClicked.cardIndex) {
 		matchCount++;
 		accuracy = `${(matchCount / attempts * 100).toFixed(1)}%`;
-
+//check win scenario and return appropriate action
 		if (matchCount === cardCount / 2) {
 			return {
 				...state,
@@ -89,9 +90,8 @@ export const checkPair = (state) => {
 			canBeClicked: true
 		};
 	}
-
+//no win, dispatch updated state
 	accuracy = `${(matchCount / attempts * 100).toFixed(1)}%`;
-
 	return {
 		...state,
 		attempts,
@@ -104,8 +104,7 @@ export const concealCards = (state) => {
 	let { firstCardClicked, secondCardClicked, gameBoardCheck } = state;
 	if (firstCardClicked === null) {
 		return state;
-	}
-
+	};
 	gameBoardCheck[firstCardClicked.cardIndex] = false;
 	gameBoardCheck[secondCardClicked.cardIndex] = false;
 	return {

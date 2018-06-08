@@ -17,7 +17,8 @@ class GameBoard extends Component {
   }
   componentWillReceiveProps(nextProps){
 		if (nextProps.secondCardClicked !== null) {
-			this.props.checkPair();
+      this.props.checkPair();
+      console.log(nextProps.noMatch)
 		}
   }
   render(){
@@ -39,7 +40,7 @@ const mapStateToProps = (state) => {
 		gameBoardCheck: state.game.gameBoardCheck,
 		firstCardClicked: state.game.firstCardClicked,
 		secondCardClicked: state.game.secondCardClicked,
-		cardPack: state.game.cardPack
+		noMatch: state.game.noMatch
   };
 }
 export default connect(mapStateToProps, { generateCards, checkPair })(GameBoard);

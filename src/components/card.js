@@ -9,13 +9,13 @@ class Card extends Component {
     super(props);
   }
 	componentWillReceiveProps(nextProps) {
+    console.log(nextProps.noMatch)
 		if (nextProps.noMatch) {
-			this.resetCards = setTimeout(this.props.concealCards, 1000);
+			setTimeout(this.props.concealCards, 750);
 		}
 	}
 	cardClicked() {
     this.props.revealCard(this.props.cardImage, this.props.index);
-    console.log(this.props.gameBoardCheck)
   }
   render(){
 		let backStyle = {

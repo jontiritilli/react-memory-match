@@ -30,7 +30,7 @@ export default function(state = DEFAULT_STATE, action) {
 		case types.CHECK_PAIR:
 			return checkPair(state);
 
-		case types.REVERT_CARDS:
+		case types.CONCEAL_CARDS:
 			return concealCards(state);
 
 		case types.RESET_GAME:
@@ -44,7 +44,7 @@ export default function(state = DEFAULT_STATE, action) {
 				firstCardClicked: null,
 				secondCardClicked: null,
 				canBeClicked: true,
-				isMatch: false,
+				noMatch: false,
 				gamePlayCount: gamePlayCount + 1,
 				tryCount: 0,
 				accuracy: '---'
