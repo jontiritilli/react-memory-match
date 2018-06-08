@@ -1,7 +1,7 @@
 {
-  "name": "react-boiler",
+  "name": "react-memory-match",
   "version": "1.0.0",
-  "description": "Starting setup for react redux project",
+  "description": "memory match game built in react",
   "main": "index.js",
   "scripts": {
     "start": "node dev_server.js",
@@ -12,7 +12,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jontiritilli/react-boiler.git"
+    "url": "https://github.com/jontiritilli/react-memory-match.git"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
