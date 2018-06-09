@@ -9,9 +9,10 @@ class Card extends Component {
     super(props);
   }
 	componentWillReceiveProps(nextProps) {
-    console.log(nextProps.noMatch)
+    console.log('no match before check ' + nextProps.noMatch)
 		if (nextProps.noMatch) {
-			setTimeout(this.props.concealCards, 750);
+      console.log('nomatch in check ' + nextProps.noMatch)
+			this.resetCards = setTimeout(this.props.concealCards, 750);
 		}
 	}
 	cardClicked() {

@@ -16,9 +16,9 @@ class GameBoard extends Component {
     setTimeout(this.props.generateCards, 250);
   }
   componentWillReceiveProps(nextProps){
+    console.log(nextProps.secondCardClicked)
 		if (nextProps.secondCardClicked !== null) {
       this.props.checkPair();
-      console.log(nextProps.noMatch)
 		}
   }
   render(){
@@ -26,9 +26,8 @@ class GameBoard extends Component {
       return <Card key={idx} index={idx} cardImage={card}/>
     })
     return (
-      <div className="gameContainer">
-        Here is the game board
-        <div className={'grid-container'+ (this.props.cardImages[0] ? ' show' : '')}>{cards}</div>
+      <div className='gameContainer'>
+        <div className={'gridContainer'+ (this.props.cardImages[0] ? ' show' : '')}>{cards}</div>
       </div>
     )
   }

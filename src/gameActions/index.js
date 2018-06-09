@@ -67,8 +67,7 @@ export const checkPair = (state) => {
 	} = state;
 
 	attempts++;
-
-	if (firstCardClicked.cardIndex === secondCardClicked.cardIndex) {
+	if (firstCardClicked.cardImage === secondCardClicked.cardImage) {
 		matchCount++;
 		accuracy = `${(matchCount / attempts * 100).toFixed(1)}%`;
 //check win scenario and return appropriate action
@@ -79,7 +78,8 @@ export const checkPair = (state) => {
 				matchCount,
 				accuracy
 			};
-		}
+    }
+    //found match, no win, dispatch updated state
 		return {
 			...state,
 			firstCardClicked: null,
