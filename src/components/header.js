@@ -6,6 +6,8 @@ export default (props) => {
   return (
     <div className='headerContainer'>
       <img className='headerLogo' src={Logo} alt=""/>
+      <div className="blur">
+      </div>
     </div>
   )
 }

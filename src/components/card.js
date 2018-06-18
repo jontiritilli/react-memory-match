@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {revealCard, concealCards} from '../actions';
 
 import cardBack from '../assets/images/card-back.png';
 
-class Card extends Component {
+class Card extends React.Component {
   constructor(props){
     super(props);
   }

@@ -4,6 +4,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import Header from './header';
 import GameBoard from './gameBoard';
+import ScoreBoard from './scoreBoard';
 import { generateCards, checkPair } from '../actions';
 
 import '../assets/css/app.css';
@@ -50,6 +51,7 @@ class PlayPage extends Component {
       <div className="mainContainer">
         <Header/>
         <GameBoard key={this.props.gamePlayCount}/>
+        <ScoreBoard/>
       </div>
     )
   }

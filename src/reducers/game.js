@@ -1,5 +1,5 @@
 import types from '../actions/types';
-import { generateCards, revealCard, checkPair, concealCards } from '../gameActions';
+import { generateCards, checkPair, revealCard, concealCards } from '../gameActions';
 
 const DEFAULT_STATE = {
 	cardCount: 0,
@@ -12,7 +12,7 @@ const DEFAULT_STATE = {
 	noMatch: false,
 	gamePlayCount: 0,
 	tryCount: 0,
-	accuracy: '---'
+	accuracy: 100
 };
 
 export default function(state = DEFAULT_STATE, action) {
@@ -38,7 +38,7 @@ export default function(state = DEFAULT_STATE, action) {
 			return {
 				...state,
 				cardCount: 18,
-				matchCount: 0,
+				matchesCount: 0,
 				cardImages: [],
 				gameBoardCheck: new Array(18).fill(false),
 				firstCardClicked: null,
@@ -47,7 +47,7 @@ export default function(state = DEFAULT_STATE, action) {
 				noMatch: false,
 				gamePlayCount: gamePlayCount + 1,
 				tryCount: 0,
-				accuracy: '---'
+				accuracy: 100
 			};
 
 		default:

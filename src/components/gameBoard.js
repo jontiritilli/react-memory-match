@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { setTimeout } from 'timers';
 
@@ -7,7 +7,7 @@ import { generateCards, checkPair } from '../actions';
 
 import '../assets/css/app.css';
 
-class GameBoard extends Component {
+class GameBoard extends React.Component {
   constructor(props){
     super(props);
     this.state = {}

@@ -14,28 +14,48 @@ html,body {
 .card > .back {
   position: absolute;
 }
-.gameContainer {
-  width: 100%;
-  height: 100%;
-}
-.gridContainer {
-  margin-top: 2%;
-  width: 90%;
-}
-.headerContainer {
-  width: 100%;
-  height: 10%;
-  background-color: white;
-  box-shadow: 0 2px 0px 0 rgba(0,0,0,0.16)
-}
-.headerLogo {
-  height: 100%;
-}
-.mainTitle {
-  width:
-}
 .mainContainer {
   width: 100vw;
   height: 100vh;
   background-image: url(../images/background_5.jpg);
+}
+.gameContainer {
+  width: 100%;
+  height: 90%;
+}
+.gridContainer {
+  padding-top: 2%;
+  width: 70%;
+}
+.headerContainer {
+  width: 100%;
+  height: 10%;
+  background-color: rgba(255,255,255,0.16);
+  box-shadow: 0 2px 0px 0 rgba(0,0,0,0.16)
+}
+.headerLogo {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 125px;
+}
+.mainTitle {
+  width: 50%;
+}
+.blur {
+  position: absolute;
+  top: 0;
+  height: 10%;
+  width: 100%;
+}
+
+.blur::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background-image: url(../images/background_5.jpg);
+  -webkit-filter: blur(20px);
+  filter: blur(20px);
+  content: ' ';
 }
