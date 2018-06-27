@@ -1,11 +1,13 @@
 import React from 'react';
 
+import Logo from '../assets/images/logo_small.png';
+
 export default (props) => {
   return (
-    <div className='header'>
-      <h2 className='mainTitle'>
-        Poke-Match
-      </h2>
+    <div className='headerContainer'>
+      <img className='headerLogo' src={Logo} alt=""/>
+      <div className="blur">
+      </div>
     </div>
   )
 }

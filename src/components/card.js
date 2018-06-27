@@ -1,21 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {revealCard, concealCards} from '../actions';
 
 import cardBack from '../assets/images/card-back.png';
 
-class Card extends Component {
+class Card extends React.Component {
   constructor(props){
     super(props);
   }
 	componentWillReceiveProps(nextProps) {
+    console.log('no match before check ' + nextProps.noMatch)
 		if (nextProps.noMatch) {
-			this.resetCards = setTimeout(this.props.concealCards, 1000);
+      console.log('nomatch in check ' + nextProps.noMatch)
+			this.resetCards = setTimeout(this.props.concealCards, 750);
 		}
 	}
 	cardClicked() {
     this.props.revealCard(this.props.cardImage, this.props.index);
-    console.log(this.props.gameBoardCheck)
   }
   render(){
 		let backStyle = {

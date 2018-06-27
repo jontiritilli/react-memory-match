@@ -28,7 +28,7 @@ export const generateCards = () => {
 };
 
 export const revealCard = (state, payload) => {
-	let { firstCardClicked, gameBoardCheck, canBeClicked } = state;
+	let { firstCardClicked, secondCardClicked, gameBoardCheck, canBeClicked } = state;
 	const { cardIndex: idx } = payload;
 	if (gameBoardCheck[idx] || firstCardClicked === payload || !canBeClicked) {
 		return state;
@@ -40,15 +40,17 @@ export const revealCard = (state, payload) => {
 
 		return {
       ...state,
-			firstCardClicked: payload,
+			firstCardClicked,
 			gameBoardCheck
 		};
 	}
 
-	gameBoardCheck[idx] = true;
+  secondCardClicked = payload;
+  gameBoardCheck[idx] = true;
+
 	return {
 		...state,
-		secondCardClicked: payload,
+		secondCardClicked,
 		gameBoardCheck,
 		canBeClicked: false
 	};
@@ -56,42 +58,40 @@ export const revealCard = (state, payload) => {
 
 export const checkPair = (state) => {
 	let {
-		gamePlayCount,
 		attempts,
 		accuracy,
-		matchCount,
+		matchesCount,
 		cardCount,
 		firstCardClicked,
-		secondCardClicked
+    secondCardClicked
 	} = state;
 
+  accuracy = (matchesCount/attempts*100).toFixed(1);
 	attempts++;
-
-	if (firstCardClicked.cardId === secondCardClicked.cardId) {
-		matchCount++;
-		accuracy = `${(matchCount / attempts * 100).toFixed(1)}%`;
-
-		if (matchCount === cardCount / 2) {
+	if (firstCardClicked.cardImage === secondCardClicked.cardImage) {
+		matchesCount++;
+//check win scenario and return appropriate action
+		if (matchesCount === cardCount / 2) {
 			return {
 				...state,
 				attempts,
-				matchCount,
+				matchesCount,
 				accuracy
 			};
-		}
+    }
+    //found match, no win, dispatch updated state
 		return {
 			...state,
 			firstCardClicked: null,
 			secondCardClicked: null,
 			attempts,
 			accuracy,
-			matchCount,
+			matchesCount,
 			canBeClicked: true
 		};
 	}
-
-	accuracy = `${(matchCount / attempts * 100).toFixed(1)}%`;
-
+//no win, dispatch updated state
+	accuracy = (matchesCount/attempts*100).toFixed(1);
 	return {
 		...state,
 		attempts,
@@ -104,8 +104,7 @@ export const concealCards = (state) => {
 	let { firstCardClicked, secondCardClicked, gameBoardCheck } = state;
 	if (firstCardClicked === null) {
 		return state;
-	}
-
+	};
 	gameBoardCheck[firstCardClicked.cardIndex] = false;
 	gameBoardCheck[secondCardClicked.cardIndex] = false;
 	return {
@@ -115,5 +114,5 @@ export const concealCards = (state) => {
 		gameBoardCheck,
 		canBeClicked: true,
 		noMatch: false
-	};
+  };
 };
