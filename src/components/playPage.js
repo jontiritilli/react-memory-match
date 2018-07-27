@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Header from './header';
 import GameBoard from './gameBoard';

@@ -58,7 +58,7 @@ export const revealCard = (state, payload) => {
 
 export const checkPair = (state) => {
 	let {
-		attempts,
+		tryCount,
 		accuracy,
 		matchesCount,
 		cardCount,
@@ -66,15 +66,15 @@ export const checkPair = (state) => {
     secondCardClicked
 	} = state;
 
-  accuracy = (matchesCount/attempts*100).toFixed(1);
-	attempts++;
+	tryCount++;
 	if (firstCardClicked.cardImage === secondCardClicked.cardImage) {
 		matchesCount++;
+    accuracy = accuracyCalc(matchesCount, tryCount);
 //check win scenario and return appropriate action
 		if (matchesCount === cardCount / 2) {
 			return {
 				...state,
-				attempts,
+				tryCount,
 				matchesCount,
 				accuracy
 			};
@@ -84,27 +84,29 @@ export const checkPair = (state) => {
 			...state,
 			firstCardClicked: null,
 			secondCardClicked: null,
-			attempts,
+			tryCount,
 			accuracy,
 			matchesCount,
 			canBeClicked: true
 		};
 	}
 //no win, dispatch updated state
-	accuracy = (matchesCount/attempts*100).toFixed(1);
+	accuracy = accuracyCalc(matchesCount, tryCount);
 	return {
 		...state,
-		attempts,
+		tryCount,
 		accuracy,
 		noMatch: true
 	};
 };
 
+export const accuracyCalc = (matchesCount, tryCount) => ((matchesCount/tryCount)*100).toFixed(1);
+
 export const concealCards = (state) => {
 	let { firstCardClicked, secondCardClicked, gameBoardCheck } = state;
 	if (firstCardClicked === null) {
 		return state;
-	};
+	}
 	gameBoardCheck[firstCardClicked.cardIndex] = false;
 	gameBoardCheck[secondCardClicked.cardIndex] = false;
 	return {
