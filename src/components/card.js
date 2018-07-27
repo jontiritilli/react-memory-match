@@ -9,9 +9,8 @@ class Card extends React.Component {
     super(props);
   }
 	componentWillReceiveProps(nextProps) {
-    console.log('no match before check ' + nextProps.noMatch)
 		if (nextProps.noMatch) {
-      console.log('nomatch in check ' + nextProps.noMatch)
+      console.log(this.props)
 			this.resetCards = setTimeout(this.props.concealCards, 750);
 		}
 	}
@@ -39,7 +38,9 @@ const mapStateToProps = (state) => {
 		gameBoardCheck: state.game.gameBoardCheck,
 		firstCardClicked: state.game.firstCardClicked,
 		secondCardClicked: state.game.secondCardClicked,
-		noMatch: state.game.noMatch
+    noMatch: state.game.noMatch,
+    matchesCount: state.game.matchesCount,
+    tryCount: state.game.tryCount
 	};
 }
 
